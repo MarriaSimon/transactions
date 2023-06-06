@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -51,4 +52,15 @@ public class TransactionsController {
         return transactionsService.deleteId(id);
     }
 
+    //GET /transactions/reports/type -> returns a map from type to list of transactions of that type
+    @GetMapping("reports/type")
+    public Map<String, List<Transaction>> getTransactionByType() {
+        return transactionsService.getTransactionsByType();
+    }
+
+    //GET /transactions/reports/product -> returns a map from product to list of transactions for that product
+    @GetMapping("reports/product")
+    public Map<String, List<Transaction>> getTransactionByProduct() {
+        return transactionsService.getTransactionByProduct();
+    }
 }

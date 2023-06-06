@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Component
@@ -67,6 +69,24 @@ public class TransactionsService {
                 .type("SELL")
                 .amount(120.5)
                 .build();
+        Transaction transaction8 = Transaction.builder()
+                .id(7)
+                .product("Fridge")
+                .type("BUY")
+                .amount(235.4)
+                .build();
+        Transaction transaction9 = Transaction.builder()
+                .id(7)
+                .product("Monitor")
+                .type("BUY")
+                .amount(55.6)
+                .build();
+        Transaction transaction10 = Transaction.builder()
+                .id(7)
+                .product("Headphone")
+                .type("BUY")
+                .amount(299.99)
+                .build();
 
         transactionList.add(transaction1);
         transactionList.add(transaction2);
@@ -75,6 +95,10 @@ public class TransactionsService {
         transactionList.add(transaction5);
         transactionList.add(transaction6);
         transactionList.add(transaction7);
+        transactionList.add(transaction8);
+        transactionList.add(transaction9);
+        transactionList.add(transaction10);
+
 
     }
 
@@ -83,9 +107,9 @@ public class TransactionsService {
         return transaction;
     }
 
-
     //GET /transactions - get all transactions.
     public List<Transaction> getAllTransactions() {
+
         return transactionList;
     }
 
@@ -118,12 +142,9 @@ public class TransactionsService {
     public Transaction updateTransaction(Transaction transaction, long id) {
         Transaction existingTransaction = getTransactionById(id);
         if (existingTransaction == null) {
-            return null; // or throw an exception indicating that the transaction does not exist
+            return null;
         }
 
-
-
-        // Transaction existingTransaction = deleteId(id);
         Transaction updatedTransaction = Transaction.builder()
                 .id(id)
                 .product(transaction.product())
@@ -141,6 +162,18 @@ public class TransactionsService {
         Transaction transaction = getTransactionById(id);
         transactionList.remove(transaction);
         return transaction;
+    }
+
+    //GET /transactions/reports/type -> returns a map from type to list of transactions of that type
+    public Map<String, List<Transaction>> getTransactionsByType() {
+        return transactionList.stream()
+                .collect(Collectors.groupingBy(Transaction::type));
+    }
+
+    // GET /transactions/reports/product -> returns a map from product to list of transactions for that product
+    public Map<String, List<Transaction>> getTransactionByProduct() {
+        return transactionList.stream()
+                .collect(Collectors.groupingBy(Transaction::product));
     }
 
 }

@@ -3,26 +3,23 @@ package org.facttrackit.transactions.budget;
 import lombok.*;
 
 
-
-
 @Builder
 
 
 public record Transaction(long id, String product, String type, double amount) {
-    public long id(){
+    public long id() {
         return id;
     }
-    public String product(){
+
+    public String product() {
         return product;
     }
-    public String type(){
+
+    public String type() {
         return type;
     }
-    public double amount(){
+
+    public double amount() {
         return amount;
-    }
-    public void setId() {
-        long id = 1;
-        id++;
     }
 }
