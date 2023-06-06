@@ -70,19 +70,19 @@ public class TransactionsService {
                 .amount(120.5)
                 .build();
         Transaction transaction8 = Transaction.builder()
-                .id(7)
+                .id(8)
                 .product("Fridge")
                 .type("BUY")
                 .amount(235.4)
                 .build();
         Transaction transaction9 = Transaction.builder()
-                .id(7)
+                .id(9)
                 .product("Monitor")
                 .type("BUY")
                 .amount(55.6)
                 .build();
         Transaction transaction10 = Transaction.builder()
-                .id(7)
+                .id(10)
                 .product("Headphone")
                 .type("BUY")
                 .amount(299.99)

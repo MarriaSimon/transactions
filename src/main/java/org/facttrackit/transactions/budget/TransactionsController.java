@@ -27,7 +27,7 @@ public class TransactionsController {
         return transactionsService.getAllTransactionsFilterable(product, type, minAmount, maxAmount);
     }
 
-    //GET /transactions/{id} - get transaction with id
+    //GET /http://localhost:8080/transactions/5 - get transaction with id
     @GetMapping("/{id}")  //http://localhost:8080/transactions/5
     public Transaction getById(@PathVariable long id) {
         return transactionsService.getTransactionById(id);
@@ -46,19 +46,19 @@ public class TransactionsController {
         return transactionsService.updateTransaction(transaction, id);
     }
 
-    //DELETE /transactions/{id} - deletes the transaction with id
+    //DELETE /http://localhost:8080/transactions/2 - deletes the transaction with id
     @DeleteMapping("/{id}")
     public Transaction deleteById(@PathVariable long id) {
         return transactionsService.deleteId(id);
     }
 
-    //GET /transactions/reports/type -> returns a map from type to list of transactions of that type
+    //GET http://localhost:8080/transactions/reports/type -> returns a map from type to list of transactions of that type
     @GetMapping("reports/type")
     public Map<String, List<Transaction>> getTransactionByType() {
         return transactionsService.getTransactionsByType();
     }
 
-    //GET /transactions/reports/product -> returns a map from product to list of transactions for that product
+    //GET /http://localhost:8080/transactions/reports/product -> returns a map from product to list of transactions for that product
     @GetMapping("reports/product")
     public Map<String, List<Transaction>> getTransactionByProduct() {
         return transactionsService.getTransactionByProduct();
